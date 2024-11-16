@@ -240,6 +240,8 @@ func handleSetSTTInfo(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "language not valid", http.StatusBadRequest)
 			return
 		}
+	} else if vars.APIConfig.STT.Service == "google" {
+		// 	  Do nothing
 	} else {
 		http.Error(w, "service must be vosk or whisper", http.StatusBadRequest)
 		return

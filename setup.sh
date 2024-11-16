@@ -143,9 +143,10 @@ function getSTT() {
         echo "1: Coqui (local, no usage collection, less accurate, a little slower)"
         echo "2: Picovoice Leopard (local, usage collected, accurate, account signup required)"
         echo "3: VOSK (local, accurate, multilanguage, fast, recommended)"
-        # echo "4: Whisper (local, accurate, multilanguage, a little slower, recommended for more powerful hardware)"
+        echo "4: Google"
+        # echo "5: Whisper (local, accurate, multilanguage, a little slower, recommended for more powerful hardware)"
         echo
-        read -p "Enter a number (3): " sttServiceNum
+        read -p "Enter a number (4): " sttServiceNum
         if [[ ! -n ${sttServiceNum} ]]; then
             sttService="vosk"
             elif [[ ${sttServiceNum} == "1" ]]; then
@@ -160,6 +161,8 @@ function getSTT() {
             elif [[ ${sttServiceNum} == "3" ]]; then
             sttService="vosk"
             elif [[ ${sttServiceNum} == "4" ]]; then
+            sttService="google"
+            elif [[ ${sttServiceNum} == "5" ]]; then
             sttService="whisper"
         else
             echo
@@ -173,7 +176,9 @@ function getSTT() {
     else
         sttServicePrompt
     fi
-    if [[ ${sttService} == "leopard" ]]; then
+    if [[ ${sttService} == "google" ]]; then
+      echo "export STT_SERVICE=google" >> ./chipper/source.sh
+    elif [[ ${sttService} == "leopard" ]]; then
         function picoApiPrompt() {
             echo
             echo "Create an account at https://console.picovoice.ai/ and enter the Access Key it gives you."

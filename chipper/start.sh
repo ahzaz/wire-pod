@@ -56,6 +56,12 @@ if [[ ${STT_SERVICE} == "leopard" ]]; then
     else
         /usr/local/go/bin/go run -tags $GOTAGS -ldflags="${GOLDFLAGS}" cmd/experimental/houndify/main.go
     fi
+    elif [[ ${STT_SERVICE} == "google" ]]; then
+    if [[ -f ./chipper ]]; then
+        ./chipper
+    else
+        /usr/local/go/bin/go run -tags $GOTAGS -ldflags="${GOLDFLAGS}" cmd/google/main.go
+    fi
     elif [[ ${STT_SERVICE} == "whisper" ]]; then
     if [[ -f ./chipper ]]; then
         ./chipper
