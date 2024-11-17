@@ -181,7 +181,7 @@ func StartChipper() {
 		logger.Println("not starting chipper at port 443 because android")
 	} else {
 		logger.Println("Starting chipper server at port " + vars.APIConfig.Server.Port)
-		listenerOne, err = tls.Listen("tcp", ":"+vars.APIConfig.Server.Port, &tls.Config{
+		listenerOne, err = tls.Listen("tcp", "0.0.0.0:"+vars.APIConfig.Server.Port, &tls.Config{
 			Certificates: []tls.Certificate{cert},
 			CipherSuites: nil,
 		})
@@ -198,7 +198,7 @@ func StartChipper() {
 
 	if vars.APIConfig.Server.EPConfig && os.Getenv("NO8084") != "true" {
 		logger.Println("Starting chipper server at port 8084 for 2.0.1 compatibility")
-		listenerTwo, err = tls.Listen("tcp", ":8084", &tls.Config{
+		listenerTwo, err = tls.Listen("tcp", "0.0.0.0:8084", &tls.Config{
 			Certificates: []tls.Certificate{cert},
 			CipherSuites: nil,
 		})
